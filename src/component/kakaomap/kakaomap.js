@@ -13,7 +13,7 @@ const KakaoMap = () => {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(0, 0),
-        level: 3
+        level: 7
       };
       const map = new kakao.maps.Map(container, options);
       const geocoder = new kakao.maps.services.Geocoder();
@@ -32,7 +32,7 @@ const KakaoMap = () => {
           map.setCenter(coords);
         }
       };
-      geocoder.addressSearch("마곡동", handleAddress);
+      geocoder.addressSearch("서울 강서구 공항대로 212", handleAddress);
     });
   };
   return (
