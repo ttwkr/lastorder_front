@@ -32,30 +32,6 @@ const Main = () => {
     };
   }, [productdata]); // data가 바뀔때마다 리렌더링한다
 
-  // // 주문 현황 부분
-  // useEffect(() => {
-  //   const wsorder = new WebSocket(`ws://${dns}:8000/ws/order/`);
-
-  //   wsorder.onopen = () => {
-  //     console.log("order connect");
-  //   };
-
-  //   wsorder.onmessage = e => {
-  //     console.log(2);
-  //     const backdata = JSON.parse(e.data);
-  //     setOrderdata(orderdata.concat(backdata.data));
-  //     console.log(backdata);
-  //   };
-
-  //   wsorder.onclose = () => {
-  //     console.log("order close");
-  //   };
-
-  //   //뒷정리 해준다
-  //   return () => {
-  //     wsorder.close();
-  //   };
-  // }, [orderdata]); // data가 바뀔때마다 리렌더링한다
   return (
     <div>
       <Product data={productdata}></Product>
