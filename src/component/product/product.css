@@ -1,0 +1,17 @@
+.product {
+  display: flex;
+}
+.count {
+  display: flex;
+}
+
+.count div {
+  margin: 10px;
+}
+.product div {
+  margin: 10px;
+}
+
+.product_main {
+  display: flex;
+}

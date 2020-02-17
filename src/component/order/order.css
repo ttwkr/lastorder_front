@@ -1,0 +1,7 @@
+.order {
+  display: flex;
+}
+
+.order div {
+  margin: 10px;
+}

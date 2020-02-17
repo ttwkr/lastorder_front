@@ -1,40 +1,11 @@
-import React, { useState, useEffect } from "react";
-import dns from "../dns";
+import React from "react";
 import Product from "../component/product/product";
 import Order from "../component/order/order";
 
 const Main = () => {
-  // 데이터 관리해주는 부분
-  const [productdata, setProductdata] = useState([]);
-  const [orderdata, setOrderdata] = useState([]);
-
-  // 웹소켓 연결 부분
-  // 업체 물품 등록 부분
-  useEffect(() => {
-    const wsproduct = new WebSocket(`ws://${dns}:8000/ws/product/`);
-
-    wsproduct.onopen = () => {
-      console.log("product connect");
-    };
-
-    wsproduct.onmessage = e => {
-      const backdata = JSON.parse(e.data);
-      setProductdata([backdata.data, ...productdata]);
-    };
-
-    wsproduct.onclose = () => {
-      console.log("product close");
-    };
-
-    //뒷정리 해준다
-    return () => {
-      wsproduct.close();
-    };
-  }, [productdata]); // data가 바뀔때마다 리렌더링한다
-
   return (
     <div>
-      <Product data={productdata}></Product>
+      <Product></Product>
       <Order></Order>
     </div>
   );

@@ -1,4 +1,9 @@
-#map {
+#product_map {
+  width: 500px;
+  height: 400px;
+}
+
+#order_map {
   width: 500px;
   height: 400px;
 }
