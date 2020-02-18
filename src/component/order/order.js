@@ -59,6 +59,7 @@ const OrderComponent = ({ data }) => {
     receiveMapData = data[0]["todaydata"];
   }
 
+
   return (
     <div>
       <h2>Order</h2>
