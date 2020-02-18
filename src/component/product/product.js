@@ -1,20 +1,30 @@
 import React, { useState, useCallback, useEffect } from "react";
-import wsproduct from "../../websocket";
+import { dns } from "../../dns";
+import axios from "axios";
+import { wsproduct } from "../../websocket";
 import KakaoMap from "../kakaomap/kakaomap";
 import "./product.css";
 
 const Product = () => {
+  const [getdbData, setGetdbData] = useState([]);
   const [productdata, setProductdata] = useState([]);
   const [count, setCount] = useState({});
-  const [location, setLocation] = useState({});
-  const [locationList, setLocationList] = useState([]);
+  const [location, setLocation] = useState({
+    lat: 37.27943075229118,
+    lng: 127.01763998406159
+  });
+  const [locationList, setLocationList] = useState([
+    {
+      lat: 37.27943075229118,
+      lng: 127.01763998406159
+    }
+  ]);
 
-  // const getList = async () => {
-  //   await axios.get(`http://${dns}:8000/productlist`).then(res => {
-  //     console.log(res.data);
-  //     setProductdata(res.data.data);
-  //   });
-  // };
+  const getList = async () => {
+    await axios.get(`http://${dns}:8000/productlist`).then(res => {
+      setGetdbData(res.data.data);
+    });
+  };
   const product_backdata = useCallback(
     data => {
       setProductdata([data, ...productdata]);
@@ -24,22 +34,26 @@ const Product = () => {
 
   const product_location = (long, lati) => {
     setLocation({
-      lat: lati,
-      lng: long
+      lat: Number(lati),
+      lng: Number(long)
     });
   };
 
-  const location_list = useCallback(() => {
-    setLocationList([location, ...locationList]);
-  }, [location, locationList]);
+  const location_list = useCallback(
+    (long, lati) => {
+      product_location(long, lati);
+      setLocationList([location, ...locationList]);
+    },
+    [location, locationList]
+  );
 
   const product_count = data => {
     setCount(data);
   };
 
-  // useEffect(() => {
-  //   getList();
-  // }, []);
+  useEffect(() => {
+    getList();
+  }, []);
   // 웹소켓 연결 부분
   // 업체 물품 등록 부분
 
@@ -57,20 +71,10 @@ const Product = () => {
       if (type === "INSERT" || type === "MODIFY") {
         product_backdata(backdata.data);
         product_count(backdata.data.count);
-        product_location(backdata.data.store_lat, backdata.data.store_lng);
-        location_list();
+        // product_location(backdata.data.store_lat, backdata.data.store_lng);
+        location_list(backdata.data.store_lng, backdata.data.store_lat);
       }
-      console.log(locationList);
     };
-
-    // wsproduct.onclose = () => {
-    //   console.log("product close");
-    // };
-
-    // //뒷정리 해준다
-    // return () => {
-    //   wsproduct.close();
-    // };
   }, [locationList, location_list, product_backdata]); // data가 바뀔때마다 리렌더링한다
 
   return (
@@ -90,6 +94,21 @@ const Product = () => {
             </div>
           );
         })}
+        <div>
+          {getdbData.slice(0, 10).map((curr, i) => {
+            return (
+              <div key={i} className="product">
+                <div>{curr.product_id}</div>
+                <div>{curr.store_name}</div>
+                <div>{curr.product}</div>
+                <div>{curr.price}</div>
+                <div>{curr.quantity}</div>
+                <div>{curr.status}</div>
+                <div>{curr.created_at}</div>
+              </div>
+            );
+          })}
+        </div>
         <div className="count">
           <div>{count.today_count}</div>
           <div>{count.status_1_count}</div>
