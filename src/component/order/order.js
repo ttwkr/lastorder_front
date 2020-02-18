@@ -53,7 +53,7 @@ const OrderComponent = ({ data }) => {
 
   // map data
 
-  let receiveMapData = null;
+  let receiveMapData = [];
 
   if (data.length > 0) {
     receiveMapData = data[0]["todaydata"];
