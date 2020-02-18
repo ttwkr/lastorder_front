@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import wsproduct from "../../websocket";
+import {wsproduct} from "../../websocket";
 import KakaoMap from "../kakaomap/kakaomap";
 import "./product.css";
 
