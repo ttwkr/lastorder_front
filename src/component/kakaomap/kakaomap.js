@@ -1,13 +1,14 @@
 /*global kakao*/
 import React, { useEffect } from "react";
 import "./kakao.css";
+import { kakaoMapAPIkey } from "../../dns";
 
-const KakaoMap = ({ id, locationList }) => {
+const KakaoMap = ({ id, locationList, data }) => {
   useEffect(() => {
     const script = document.createElement("script");
 
     script.src =
-      "http://dapi.kakao.com/v2/maps/sdk.js?appkey=108c0a7ec8439e85433cb7819cc4d5f1&autoload=false&libraries=services,clusterer";
+      `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapAPIkey}&autoload=false&libraries=services,clusterer`;
     document.head.appendChild(script);
     script.onload = () => {
       kakao.maps.load(() => {
