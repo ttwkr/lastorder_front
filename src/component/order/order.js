@@ -52,12 +52,9 @@ const OrderComponent = ({ data }) => {
   }
 
   // map data
-  let receiveMapData = [
-    {
-      lng: 37,
-      lat: 113
-    }
-  ];
+
+  let receiveMapData = null;
+
   if (data.length > 0) {
     receiveMapData = data[0]["todaydata"];
   }

@@ -7,11 +7,15 @@
   width: 100%;
 }
 .order-area div:nth-child(1) {
+  width: 100%;
+}
+.order-area div:nth-child(1) {
   width: 40%;
   margin-right: 40px;
 }
 .order-column-title {
   display: flex;
+
   align-items: flex-start;
   justify-content: space-between;
 }
