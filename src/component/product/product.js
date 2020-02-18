@@ -22,7 +22,10 @@ const Product = () => {
 
   const getList = async () => {
     await axios.get(`http://${dns}:8000/productlist`).then(res => {
+      console.log(res.data);
       setGetdbData(res.data.data);
+      setCount(res.data.count);
+      setLocationList(res.data.location);
     });
   };
   const product_backdata = useCallback(
