@@ -6,7 +6,6 @@ import KakaoMap from "../kakaomap/kakaomap";
 import "./product.css";
 
 const Product = () => {
-  const [getdbData, setGetdbData] = useState([]);
   const [productdata, setProductdata] = useState([]);
   const [count, setCount] = useState({});
   const [location, setLocation] = useState({
@@ -22,8 +21,7 @@ const Product = () => {
 
   const getList = async () => {
     await axios.get(`http://${dns}:8000/productlist`).then(res => {
-      console.log(res.data);
-      setGetdbData(res.data.data);
+      setProductdata(res.data.data);
       setCount(res.data.count);
       setLocationList(res.data.location);
     });
@@ -97,21 +95,6 @@ const Product = () => {
             </div>
           );
         })}
-        <div>
-          {getdbData.slice(0, 10).map((curr, i) => {
-            return (
-              <div key={i} className="product">
-                <div>{curr.product_id}</div>
-                <div>{curr.store_name}</div>
-                <div>{curr.product}</div>
-                <div>{curr.price}</div>
-                <div>{curr.quantity}</div>
-                <div>{curr.status}</div>
-                <div>{curr.created_at}</div>
-              </div>
-            );
-          })}
-        </div>
         <div className="count">
           <div>{count.today_count}</div>
           <div>{count.status_1_count}</div>
