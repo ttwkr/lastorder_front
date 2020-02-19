@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { wsorder } from "../../websocket";
 import KakaoMap from "../kakaomap/kakaomap";
-// import OrderMap from "../kakaomap/ordermap";
-
 import "./order.css";
 
 const Order = () => {
@@ -33,31 +31,26 @@ const Order = () => {
 };
 
 const OrderComponent = ({ data }) => {
-  // order status
-  console.log("data is ", data);
+
   let ordercount = [0, 0];
-  if (data.length > 0) {
-    ordercount[0] = data[0]["orderStatus"]["order"];
-    ordercount[1] = data[0]["orderStatus"]["receipt"];
-  }
-
-  // order data
-  let realtimedata = [];
-  for (let i = 0; i < data.length; i++) {
-    realtimedata.push(data[i]["data"]);
-  }
-  const lastdata = realtimedata.flat();
-  if (lastdata.length > 10) {
-    lastdata.pop();
-  }
-
-  // map data
-
   let receiveMapData = [];
 
   if (data.length > 0) {
+    // order status count
+    ordercount[0] = data[0]["orderStatus"]["order"];
+    ordercount[1] = data[0]["orderStatus"]["receipt"];
+    // map data
     receiveMapData = data[0]["todaydata"];
   }
+  // order data
+  let realtimedata = [];
+  for (let i = 0; i < data.length; i++) {
+    if(i === 11){
+      break;
+    }
+    realtimedata.push(data[i]["data"]);
+  }
+  const lastdata = realtimedata.flat();
 
   return (
     <div>
