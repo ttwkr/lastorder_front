@@ -11,6 +11,8 @@ const KakaoMap = ({ id, location }) => {
         level: 14
       };
       const map = new kakao.maps.Map(container, options);
+
+      // 마커 클러스터 부분
       const clusterer = new kakao.maps.MarkerClusterer({
         map: map,
         averageCenter: true,

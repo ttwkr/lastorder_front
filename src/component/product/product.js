@@ -6,12 +6,14 @@ import KakaoMap from "../kakaomap/kakaomap";
 import "./product.css";
 
 const Product = () => {
-  const [productdata, setProductdata] = useState([]);
-  const [count, setCount] = useState({});
+  const [productdata, setProductdata] = useState([]); // 백엔드로 부터 받아오는 데이터 관리
+  const [count, setCount] = useState({}); // 통계관리
+  //업체 상품등록 위치 관리
   const [location, setLocation] = useState({
     lat: 37.27943075229118,
     lng: 127.01763998406159
   });
+  // 업체 상품등록 위치 리스트 관리
   const [locationList, setLocationList] = useState([
     {
       lat: 37.27943075229118,
@@ -19,6 +21,7 @@ const Product = () => {
     }
   ]);
 
+  // GET으로 api에 현재날짜의 데이터 요청
   const getList = async () => {
     await axios.get(`http://${dns}:8000/productlist`).then(res => {
       setProductdata(res.data.data);
@@ -55,10 +58,9 @@ const Product = () => {
   useEffect(() => {
     getList();
   }, []);
-  // 웹소켓 연결 부분
-  // 업체 물품 등록 부분
 
   // 한번 열어 주고 끝
+  // 소켓을 연다
   useEffect(() => {
     wsproduct.onopen = () => {
       console.log("product connect");
@@ -72,7 +74,6 @@ const Product = () => {
       if (type === "INSERT" || type === "MODIFY") {
         product_backdata(backdata.data);
         product_count(backdata.data.count);
-        // product_location(backdata.data.store_lat, backdata.data.store_lng);
         location_list(backdata.data.store_lng, backdata.data.store_lat);
       }
     };
