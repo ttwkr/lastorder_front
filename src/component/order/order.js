@@ -36,13 +36,13 @@ const OrderComponent = ({ data }) => {
   let receiveMapData = [];
 
   if (data.length > 0) {
-    // order status count
+    // 통계 - order status
     ordercount[0] = data[0]["orderStatus"]["order"];
     ordercount[1] = data[0]["orderStatus"]["receipt"];
-    // map data
+    // 통계 - 지역별 order
     receiveMapData = data[0]["todaydata"];
   }
-  // order data
+  // order data 10개로 제한
   let realtimedata = [];
   for (let i = 0; i < data.length; i++) {
     if(i === 11){

@@ -13,12 +13,12 @@
   width: 40%;
   margin-right: 40px;
 }
-.order-column-title {
+/* .order-column-title {
   display: flex;
 
   align-items: flex-start;
   justify-content: space-between;
-}
+} */
 
 .order div {
   margin: 10px;
