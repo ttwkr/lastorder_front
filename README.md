@@ -6,13 +6,15 @@
 ## 목표
 
 - 실시간 데이터를 보여주기.
+- 데이터 들어올 때 마다 리스트업
 - 실제 Back-End API를 통해 원하는 데이터를 GET 해보기.
-- 카카오 맵을 이용해 업체 상품 등록 위치 마커되게 하기
+- 카카오 맵을 이용해 업체 상품 등록 위치 마커되게 하기.
 
 ## 사용된 기술
 
 - Front-End: **ReactJS**
 - Back-End: **Django**, **Lambda**
+- DataBase : **DynamoDB**
 - Deployment: **AWS**
 
 
